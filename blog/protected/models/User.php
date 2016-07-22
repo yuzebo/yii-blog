@@ -9,6 +9,7 @@
  * @property string $password
  * @property string $email
  * @property string $profile
+ * @property string $salt
  */
 class User extends CActiveRecord
 {
@@ -29,11 +30,11 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, email', 'required'),
-			array('username, password, email', 'length', 'max'=>128),
+			array('username, password, email, salt', 'length', 'max'=>128),
 			array('profile', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, email, profile', 'safe', 'on'=>'search'),
+			array('id, username, password, email, profile, salt', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,6 +60,7 @@ class User extends CActiveRecord
 			'password' => 'Password',
 			'email' => 'Email',
 			'profile' => 'Profile',
+			'salt' => 'Salt',
 		);
 	}
 
@@ -85,6 +87,7 @@ class User extends CActiveRecord
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('profile',$this->profile,true);
+		$criteria->compare('salt',$this->salt,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -101,4 +104,14 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function validatePassword($password)
+    {
+        return $this->hashPassword($password,$this->salt)===$this->password;
+    }
+
+    public function hashPassword($password,$salt)
+    {
+        return md5($salt.$password);
+    }
 }

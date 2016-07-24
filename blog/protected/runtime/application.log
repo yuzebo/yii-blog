@@ -3246,3 +3246,99 @@ Stack trace:
 REQUEST_URI=/yii/blog/index.php?r=post/create
 HTTP_REFERER=http://127.0.0.1/yii/blog/index.php?r=site/login
 ---
+2016/07/24 15:22:37 [error] [php] Undefined variable: post (/usr/share/nginx/html/yii/blog/protected/controllers/PostController.php:139)
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(133): PostController->runAction()
+#1 /usr/share/nginx/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /usr/share/nginx/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /usr/share/nginx/html/yii/framework/web/filters/CInlineFilter.php(58): PostController->filterAccessControl()
+#4 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /usr/share/nginx/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /usr/share/nginx/html/yii/framework/web/CController.php(265): PostController->runActionWithFilters()
+#7 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(282): PostController->run()
+#8 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /usr/share/nginx/html/yii/blog/index.php(13): CWebApplication->run()
+REQUEST_URI=/yii/blog/index.php
+in /usr/share/nginx/html/yii/blog/protected/controllers/PostController.php (139)
+in /usr/share/nginx/html/yii/blog/index.php (13)
+2016/07/24 15:22:47 [error] [php] Undefined variable: posts (/usr/share/nginx/html/yii/blog/protected/controllers/PostController.php:139)
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(133): PostController->runAction()
+#1 /usr/share/nginx/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /usr/share/nginx/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /usr/share/nginx/html/yii/framework/web/filters/CInlineFilter.php(58): PostController->filterAccessControl()
+#4 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /usr/share/nginx/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /usr/share/nginx/html/yii/framework/web/CController.php(265): PostController->runActionWithFilters()
+#7 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(282): PostController->run()
+#8 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /usr/share/nginx/html/yii/blog/index.php(13): CWebApplication->run()
+REQUEST_URI=/yii/blog/index.php
+in /usr/share/nginx/html/yii/blog/protected/controllers/PostController.php (139)
+in /usr/share/nginx/html/yii/blog/index.php (13)
+2016/07/24 15:22:48 [error] [php] Undefined variable: posts (/usr/share/nginx/html/yii/blog/protected/controllers/PostController.php:139)
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(133): PostController->runAction()
+#1 /usr/share/nginx/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /usr/share/nginx/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /usr/share/nginx/html/yii/framework/web/filters/CInlineFilter.php(58): PostController->filterAccessControl()
+#4 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /usr/share/nginx/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /usr/share/nginx/html/yii/framework/web/CController.php(265): PostController->runActionWithFilters()
+#7 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(282): PostController->run()
+#8 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /usr/share/nginx/html/yii/blog/index.php(13): CWebApplication->run()
+REQUEST_URI=/yii/blog/index.php
+in /usr/share/nginx/html/yii/blog/protected/controllers/PostController.php (139)
+in /usr/share/nginx/html/yii/blog/index.php (13)
+2016/07/24 15:22:48 [error] [php] Undefined variable: posts (/usr/share/nginx/html/yii/blog/protected/controllers/PostController.php:139)
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(133): PostController->runAction()
+#1 /usr/share/nginx/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /usr/share/nginx/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /usr/share/nginx/html/yii/framework/web/filters/CInlineFilter.php(58): PostController->filterAccessControl()
+#4 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /usr/share/nginx/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /usr/share/nginx/html/yii/framework/web/CController.php(265): PostController->runActionWithFilters()
+#7 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(282): PostController->run()
+#8 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /usr/share/nginx/html/yii/blog/index.php(13): CWebApplication->run()
+REQUEST_URI=/yii/blog/index.php
+in /usr/share/nginx/html/yii/blog/protected/controllers/PostController.php (139)
+in /usr/share/nginx/html/yii/blog/index.php (13)
+2016/07/24 15:25:03 [error] [php] Undefined variable: post (/usr/share/nginx/html/yii/blog/protected/controllers/PostController.php:139)
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(133): PostController->runAction()
+#1 /usr/share/nginx/html/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /usr/share/nginx/html/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /usr/share/nginx/html/yii/framework/web/filters/CInlineFilter.php(58): PostController->filterAccessControl()
+#4 /usr/share/nginx/html/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /usr/share/nginx/html/yii/framework/web/CController.php(291): CFilterChain->run()
+#6 /usr/share/nginx/html/yii/framework/web/CController.php(265): PostController->runActionWithFilters()
+#7 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(282): PostController->run()
+#8 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#10 /usr/share/nginx/html/yii/blog/index.php(13): CWebApplication->run()
+REQUEST_URI=/yii/blog/index.php
+in /usr/share/nginx/html/yii/blog/protected/controllers/PostController.php (139)
+in /usr/share/nginx/html/yii/blog/index.php (13)
+2016/07/24 22:31:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "userType".' in /usr/share/nginx/html/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('userType')
+#1 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /usr/share/nginx/html/yii/blog/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/yii/blog/index.php?r=userType
+---
+2016/07/24 22:31:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "telbook".' in /usr/share/nginx/html/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /usr/share/nginx/html/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('telbook')
+#1 /usr/share/nginx/html/yii/framework/base/CApplication.php(185): CWebApplication->processRequest()
+#2 /usr/share/nginx/html/yii/blog/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/yii/blog/index.php?r=telbook
+---

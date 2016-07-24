@@ -1,5 +1,6 @@
 <?php
 
+
 class SiteController extends Controller
 {
 	/**
@@ -94,6 +95,7 @@ class SiteController extends Controller
 			if($model->validate() && $model->login())
 				$this->redirect(Yii::app()->user->returnUrl);
 		}
+		//var_dump(md5('demo'));die;
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}

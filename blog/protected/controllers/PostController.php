@@ -2,6 +2,17 @@
 
 class PostController extends Controller
 {
+    const STATUS_DRAFT = 1;
+    const STATUS_PUBLISHED = 2;
+    const STATUS_ARCHIVED= 3;
+    public function getPostStatus()
+    {
+        return array(
+            self::STATUS_DRAFT => 'Draft',
+            self::STATUS_PUBLISHED => 'Published',
+            self::STATUS_ARCHIVED => 'Archived',
+        );
+    }
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
@@ -63,13 +74,15 @@ class PostController extends Controller
 	public function actionCreate()
 	{
 		$model=new Post;
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Post']))
 		{
 			$model->attributes=$_POST['Post'];
+            $model->create_time = time();
+            $model->update_time = time();
+            $model->author_id = Yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -87,6 +100,7 @@ class PostController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+        $model->update_time = time();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

@@ -34,10 +34,13 @@ class Post extends CActiveRecord
 			array('title, content, status, author_id', 'required'),
 			array('status, create_time, update_time, author_id', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>128),
-			array('tags', 'safe'),
+            array('status', 'in', 'range'=>array(1,2)),
+			array('tags', 'match', 'pattern'=>'/^[\w\s,]+$/',
+                'message'=>'Tags can only contain word characters'),
+//            array('tags', 'normalizeTags'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, title, content, tags, status, create_time, update_time, author_id', 'safe', 'on'=>'search'),
+			array('title, status', 'safe', 'on'=>'search'),
 		);
 	}
 

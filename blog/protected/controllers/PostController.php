@@ -80,9 +80,9 @@ class PostController extends Controller
 		if(isset($_POST['Post']))
 		{
 			$model->attributes=$_POST['Post'];
-            $model->create_time = time();
-            $model->update_time = time();
-            $model->author_id = Yii::app()->user->id;
+//            $model->create_time = time();
+//            $model->update_time = time();
+//            $model->author_id = Yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -100,7 +100,7 @@ class PostController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-        $model->update_time = time();
+//        $model->update_time = time();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

@@ -1,22 +1,18 @@
-index.php
-
-.idea
-logs
-assets
-giga_cache
-!assets/.gitignore
-css/site.css
-protected/runtime/*
-protected/config/db.json
-protected/config/es.json
-protected/config/local.php
-protected/config/main.php
-protected/yiic.php
-!protected/runtime/.gitignore
-protected/data/*.db
-protected/scripts/set_env.sh
-themes/classic/views/
-
+blog/index.php
+blog/.idea
+blog/.assets
+blog/!assets/.gitignore
+blog/css/site.css
+blog/protected/runtime/*
+blog/protected/config/db.json
+blog/protected/config/es.json
+blog/protected/config/local.php
+blog/protected/config/main.php
+blog/protected/yiic.php
+blog/!protected/runtime/.gitignore
+blog/protected/data/*.db
+blog/protected/scripts/set_env.sh
+blog/themes/classic/views/
 
 
 # Vagrant

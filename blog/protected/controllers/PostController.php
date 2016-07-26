@@ -223,4 +223,4 @@ class PostController extends Controller
 			Yii::app()->end();
 		}
 	}
-}222222
+}

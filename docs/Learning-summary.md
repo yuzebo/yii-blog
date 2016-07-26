@@ -1,11 +1,20 @@
 #Learning-summary
+**Using Ubuntu14.04 system**
 ##1.install Nginx.
 ```bash
 $ sudo apt-get install update
 $ sudo apt-get install nginx
 ```
 ##2.test Nginx.
-*  point it to (127.0.0.1) to check that Nginx is working.
+View the machine IP address
+```bash
+ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+```
+use a web browser then write 
+```bash
+http://127.0.0.1 or http:// local ip
+```
+to check that Nginx is working.
 
 ##3.install php.
 ```bash
@@ -34,6 +43,7 @@ $  sudo service php5-fpm restart
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.back
 ```
 Modify the default document reads as follows
+```bash
 server {
 
     listen 80 default_server;
@@ -62,21 +72,27 @@ server {
         include fastcgi_params;
     }
 }
-
+```
 ##7.Restart nginx server
 ```bash
 $ sudo service nginx restart
 ```
 ##8.Download yii1.1 tar.gz
-  http://www.yiichina.com/download
+https://github.com/yiisoft/yii/releases/download/1.1.17/yii-1.1.17.467ff50.tar.gz
 
 ##9.Unzip yii to specify the root directory
-  tar -zxvf yii.tar.gz -C /usr/share/nginx/html
+```bash
+$ sudo tar -zxvf yii-1.1.17.467ff50.tar.gz -C /usr/share/nginx/html
+```
+The release of the Yii version depends on the version you downloaded.
 
 ##10.Create the application skeleton
+```bash
   % /wwwroot/yii/framework/yiic webapp /wwwroot/blog
+```
 Create a Web application under '/wwwroot/blog'? [Yes|No]y
 
+**Now you can start a blog site by Yii.**
 
 ##Successfully Accomplished next step is use github
 
@@ -107,5 +123,6 @@ $ git add (filename)
 $ git commit -m 'message'
 $ git push -f origin develop
 ```
+
 
 

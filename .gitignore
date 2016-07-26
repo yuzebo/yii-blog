@@ -1,6 +1,7 @@
 blog/index.php
+blog/.idea/workspace.xml
 blog/.idea
-blog/.assets
+blog/assets
 blog/!assets/.gitignore
 blog/css/site.css
 blog/protected/runtime/*

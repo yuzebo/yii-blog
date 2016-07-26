@@ -5,6 +5,7 @@ class PostController extends Controller
     const STATUS_DRAFT = 1;
     const STATUS_PUBLISHED = 2;
     const STATUS_ARCHIVED= 3;
+
     public function getPostStatus()
     {
         return array(
@@ -48,7 +49,7 @@ class PostController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('demo'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -188,10 +189,8 @@ class PostController extends Controller
 	public function actionAdmin()
 	{
 		$model=new Post('search');
-		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Post']))
-			$model->attributes=$_GET['Post'];
-
+		    $model->attributes = $_GET['Post'];
 		$this->render('admin',array(
 			'model'=>$model,
 		));

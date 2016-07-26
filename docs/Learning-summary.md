@@ -1,31 +1,39 @@
+#Learning-summary
 ##1.install Nginx.
-*  sudo apt-get install update
-*  sudo apt-get install nginx
-
+```bash
+$ sudo apt-get install update
+$ sudo apt-get install nginx
+```
 ##2.test Nginx.
 *  point it to (127.0.0.1) to check that Nginx is working.
 
 ##3.install php.
-* sudo apt-get install php5-fpm
+```bash
+$ sudo apt-get install php5-fpm
+```
 
 ##4.Configure PHP, modify the php.ini file.
 
 ####Backup php.ini file.
-*  cp /etc/php5/fpm/php.ini /etc/php5/fpm/php.ini.back
-
+```bash
+$ cp /etc/php5/fpm/php.ini /etc/php5/fpm/php.ini.back
+```
 ####Cancel that have security implications pathinfo mode.
-*  vim /etc/php5/fpm/php.ini
+```bash
+$ vim /etc/php5/fpm/php.ini
+```
 The (cgi.fix_pathinfo = 1) is set to (cgi.fix_pathinfo = 0).
-
-*  start up php-fpm
-*  sudo service php5-fpm restart
-
+```bash
+$  start up php-fpm
+$  sudo service php5-fpm restart
+```
 ##5.Nginx configuration process allowed to use php-fpm
 
 ####Backup / etc / nginx / sites-available / default file
-*  cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.back
-
-*  Modify the default document reads as follows
+```bash
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.back
+```
+Modify the default document reads as follows
 server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
@@ -56,41 +64,48 @@ server {
 }
 
 ##7.Restart nginx server
-*  sudo service nginx restart
-
+```bash
+$ sudo service nginx restart
+```
 ##8.Download yii1.1 tar.gz
-*  http://www.yiichina.com/download
+  http://www.yiichina.com/download
 
 ##9.Unzip yii to specify the root directory
-*  tar -zxvf yii.tar.gz -C /usr/share/nginx/html
+  tar -zxvf yii.tar.gz -C /usr/share/nginx/html
 
 ##10.Create the application skeleton
-*  % /wwwroot/yii/framework/yiic webapp /wwwroot/blog
+  % /wwwroot/yii/framework/yiic webapp /wwwroot/blog
 Create a Web application under '/wwwroot/blog'? [Yes|No]y
 
 
 ##Successfully Accomplished next step is use github
 
 ##1.First, create a ssh key locally
-*  $ ssh-keygen -t rsa -C "your_email@youremail.com"
-
+```bash
+$ ssh-keygen -t rsa -C "your_email@youremail.com"
+```
 ##2.To verify successful
-*  $ ssh -T git@github.com
-
+```bash
+$ ssh -T git@github.com
+```
 Terminal Display:Hi yuzebo! You've successfully authenticated, but GitHub does not provide shell access.
 
 ##3.Next we need to do is to spread github up local warehouse, before also need to set the username and email
-*  $ git config --global user.name "your name"
-*  $ git config --global user.email "your_email@youremail.com"
-	
+```bash
+$ git config --global user.name "your name"
+$ git config --global user.email "your_email@youremail.com"
+```	
 ##4.Add the remote address
-*  $ git remote add origin git@github.com:yourName/yourRepo.git
-*  $ check origin URL
-*  $ git remote -v 
-
+```bash 
+$ git remote add origin git@github.com:yourName/yourRepo.git
+$ check origin URL
+$ git remote -v 
+```
 ##5.git init in your project
-*  $ git add (filename)
-*  $ git commit -m 'message'
-*  $ git push -f origin develop
+```bash
+$ git add (filename)
+$ git commit -m 'message'
+$ git push -f origin develop
+```
 
 

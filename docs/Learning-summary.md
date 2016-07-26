@@ -35,6 +35,7 @@ cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.back
 ```
 Modify the default document reads as follows
 server {
+
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
 
@@ -51,8 +52,7 @@ server {
     error_page 500 502 503 504 /50x.html;
     location = /50x.html {
         root /usr/share/nginx/html;
-    }
-	
+    }	
     location ~ \.php$ {
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;

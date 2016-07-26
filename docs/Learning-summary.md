@@ -1,4 +1,4 @@
-1.install Nginx.
+*1.install Nginx.*
 sudo apt-get install update
 sudo apt-get install nginx
 

@@ -1,27 +1,17 @@
 blog/index.php
-blog/.idea/workspace.xml
 blog/.idea
 blog/!assets/.gitignore
 blog/css/site.css
 blog/protected/runtime/*
-blog/protected/config/db.json
-blog/protected/config/es.json
-blog/protected/config/local.php
 blog/protected/config/main.php
 blog/protected/yiic.php
 blog/!protected/runtime/.gitignore
 blog/protected/data/*.db
-blog/protected/scripts/set_env.sh
-blog/themes/classic/views/
 
 
 # Vagrant
 *.vagrant
 vagrant.log
-
-
-# Chef
-chef/site-cookbooks/gigadb/attributes/default.rb
 
 
 # PhpStorm

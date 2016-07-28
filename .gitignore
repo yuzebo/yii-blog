@@ -1,5 +1,7 @@
 blog/index.php
 blog/.idea
+blog/README.md~
+blog/assets/
 blog/!assets/.gitignore
 blog/css/site.css
 blog/protected/runtime/*

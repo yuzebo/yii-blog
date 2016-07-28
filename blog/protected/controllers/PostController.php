@@ -64,10 +64,35 @@ class PostController extends Controller
 	public function actionView($id)
 	{
 		$post = $this->loadModel();
+        $comment = $this->newComment($post);
         $this->render('view', array(
-           'model'=>$post,
+            'model' => $post,
+            'comment' => $comment,
         ));
 	}
+
+	protected function newComment()
+    {
+        $comment = new Comment;
+
+        if(isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form')
+        {
+            echo CActiverForm::validate($comment);
+            Yii::app()->end();
+        }
+
+        if(isset($_POST['Comment']))
+        {
+            $comment->attributes = $_POST['Comment'];
+            if($post->addComment($comment))
+            {
+                if($comment->status == Comment::STATUS_PENDING)
+                    Yii::app()->user->setFlash('commentSubmitted' , 'Thank you...');
+                $this->refresh();
+            }
+        }
+        return $comment;
+    }
 
 	private $_model;
 

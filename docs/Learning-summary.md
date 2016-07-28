@@ -85,10 +85,14 @@ https://github.com/yiisoft/yii/releases/download/1.1.17/yii-1.1.17.467ff50.tar.g
 $ sudo tar -zxvf yii-1.1.17.467ff50.tar.gz -C /usr/share/nginx/html
 ```
 The release of the Yii version depends on the version you downloaded.
+Change file name to yii
+```bash
+$ sudo mv yii-1.1.17.467ff50 yii
+```
 
 ##10.Create the application skeleton
 ```bash
-  % /wwwroot/yii/framework/yiic webapp /wwwroot/blog
+  /usr/share/nginx/html/yii/framework/yiic webapp /usr/share/nginx/html/blog
 ```
 Create a Web application under '/wwwroot/blog'? [Yes|No]y
 

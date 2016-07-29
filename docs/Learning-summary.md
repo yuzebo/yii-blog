@@ -96,6 +96,11 @@ $ sudo mv yii-1.1.17.467ff50 yii
 ```
 Create a Web application under '/wwwroot/blog'? [Yes|No]y
 
+##11.Check your blog application is working
+```bash
+127.0.0.1/yii/blog/index.php
+```
+
 **Now you can start a blog site by Yii.**
 
 ##Successfully Accomplished next step is use github

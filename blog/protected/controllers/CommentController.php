@@ -8,6 +8,8 @@ class CommentController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+    private $_model;
+
 	/**
 	 * @return array action filters
 	 */
@@ -37,7 +39,7 @@ class CommentController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('demo'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -87,6 +89,11 @@ class CommentController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+        if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end;
+        }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -95,7 +102,7 @@ class CommentController extends Controller
 		{
 			$model->attributes=$_POST['Comment'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('index'));
 		}
 
 		$this->render('update',array(
@@ -122,11 +129,29 @@ class CommentController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Comment');
+		$dataProvider=new CActiveDataProvider('Comment',array(
+		    'criteria' => array(
+		       'with' => 'post',
+               'order' => 't.status, t.create_time DESC'
+            ),
+        ));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 	}
+
+    public function actionApprove()
+    {
+        if(Yii::app()->request->isPostRequest)
+        {
+            $comment = $this->loadModel();
+            $comment->approve();
+            $this->redirect(array('index'));
+        }
+        else
+            throw new CHttpException(400,'Invalid request.Please do not repeat this request again.');
+    }
 
 	/**
 	 * Manages all models.
@@ -150,12 +175,17 @@ class CommentController extends Controller
 	 * @return Comment the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($id)
+	public function loadModel()
 	{
-		$model=Comment::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
+	    if($this->_model===null)
+	    {
+            if(isset($_GET['id']))
+                $this->_model=Comment::model()->findbyPk($_GET['id']);
+            if($this->_model===null)
+                throw new CHttpException(404,'The requested page does not exist.');
+        }
+        return $this->_model;
+
 	}
 
 	/**

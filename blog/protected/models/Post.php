@@ -18,17 +18,19 @@ class Post extends CActiveRecord
     const STATUS_DRAFT=1;
     const STATUS_PUBLISHED=2;
     const STATUS_ARCHIVED=3;
-	/**
-	 * @return string the associated database table name
-	 */
+
+    private $_oldTags;
+
+    public static  function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
+
 	public function tableName()
 	{
 		return '{{post}}';
 	}
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
@@ -40,16 +42,10 @@ class Post extends CActiveRecord
 			array('tags', 'match', 'pattern'=>'/^[\w\s,]+$/',
                 'message'=>'Tags can only contain word characters'),
             array('tags', 'normalizeTags'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+
 			array('title, status', 'safe', 'on'=>'search'),
 		);
 	}
-
-    public function normalizeTags($attribute,$params)
-    {
-        $this->tags=Tag::array2string(array_unique(Tag::string2array($this->tags)));
-    }
 
 	/**
 	 * @return array relational rules.
@@ -64,14 +60,6 @@ class Post extends CActiveRecord
             'commentCount' => array(self::STAT, 'Comment', 'post_id',
                 'condition'=>'status='.Comment::STATUS_APPROVED),
         );
-    }
-
-    public function getUrl()
-    {
-        return Yii::app()->createUrl('post/view', array(
-            'id'=>$this->id,
-            'title'=>$this->title,
-        ));
     }
 
 	/**
@@ -90,6 +78,23 @@ class Post extends CActiveRecord
 			'author_id' => 'Author',
 		);
 	}
+
+
+    public function getUrl()
+    {
+        return Yii::app()->createUrl('post/view', array(
+            'id'=>$this->id,
+            'title'=>$this->title,
+        ));
+    }
+
+    public function getTagLinks()
+    {
+        $links=array();
+        foreach (Tag::string2array($this->tags) as $tag)
+            $links[]=CHtml::link(CHtml::encode($tag), array('post/index' , 'tag'=>$tag));
+        return $links;
+    }
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
@@ -129,12 +134,29 @@ class Post extends CActiveRecord
 	 * @param string $className active record class name.
 	 * @return Post the static model class
 	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
 
-	protected function beforeSave()
+    public function normalizeTags($attribute,$params)
+    {
+        $this->tags=Tag::array2string(array_unique(Tag::string2array($this->tags)));
+    }
+
+    public function addComment($comment)
+    {
+        if (Yii::app()->parames['commentNeedApproval'])
+            $comment->status = Comment::STATUS_PENDING;
+        else
+            $comment->status = Comment::STATUS_APPROVED;
+        $comment->post_id=$this->id;
+        return $comment->save();
+    }
+
+    protected function afterFind()
+    {
+        parent::afterFind();
+        $this->_oldTags=$this->tags;
+    }
+
+    protected function beforeSave()
     {
         if(parent::beforeSave())
         {
@@ -150,17 +172,16 @@ class Post extends CActiveRecord
         else return false;
     }
 
-    private $_oldTags;
-
     protected function afterSave()
     {
         parent::afterSave();
         Tag::model()->updateFrequency($this->_oldTags, $this->tags);
     }
 
-    protected function afterFind()
+    protected function afterDelete()
     {
-        parent::afterFind();
-        $this->_oldTags=$this->tags;
+        parent::afterDelete();
+        Comment::model()->deleteAll('post_id'.$this->id);
+        Tag::model()->updateFrequency($this->tags,'');
     }
 }

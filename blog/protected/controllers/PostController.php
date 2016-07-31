@@ -2,6 +2,8 @@
 
 class PostController extends Controller
 {
+    private $_model;
+
     const STATUS_DRAFT = 1;
     const STATUS_PUBLISHED = 2;
     const STATUS_ARCHIVED= 3;
@@ -61,7 +63,7 @@ class PostController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView( )
 	{
 		$post = $this->loadModel();
         $comment = $this->newComment($post);
@@ -71,11 +73,11 @@ class PostController extends Controller
         ));
 	}
 
-	protected function newComment()
+	protected function newComment($post)
     {
         $comment = new Comment;
 
-        if(isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form')
+        if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
         {
             echo CActiverForm::validate($comment);
             Yii::app()->end();
@@ -87,14 +89,13 @@ class PostController extends Controller
             if($post->addComment($comment))
             {
                 if($comment->status == Comment::STATUS_PENDING)
-                    Yii::app()->user->setFlash('commentSubmitted' , 'Thank you...');
+                    Yii::app()->user->setFlash('commentSubmitted','Thank you for your comment. Your comment will be posted once it is approved.');
                 $this->refresh();
             }
         }
         return $comment;
     }
 
-	private $_model;
 
     public function loadModel()
     {
@@ -104,8 +105,7 @@ class PostController extends Controller
             {
                 if(Yii::app()->user->isGuest)
                 {
-                    $condition='status='.Post::STATUS_PUBLISHED
-                        .' OR status='.Post::STATUS_ARCHIVED;
+                    $condition='status='.Post::STATUS_PUBLISHED.' OR status='.Post::STATUS_ARCHIVED;
                 }else{
                     $condition='';
                 }
@@ -198,7 +198,7 @@ class PostController extends Controller
 
         $dataProvider=new CActiveDataProvider('Post', array(
             'pagination'=>array(
-                'pageSize'=>5,
+                'pageSize'=>Yii::app()->params['postsPerPage'],
             ),
             'criteria'=>$criteria,
         ));
@@ -220,6 +220,16 @@ class PostController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionSuggestTags()
+    {
+        if(isset($_GET['q']) && ($keyword=trim($_GET['q']))!=='')
+        {
+            $tags=Tag::model()->suggestTags($keyword);
+            if($tags!==array())
+                echo  implode("\n",$tags);
+        }
+    }
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
@@ -248,4 +258,6 @@ class PostController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+
 }

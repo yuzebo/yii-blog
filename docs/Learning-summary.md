@@ -1,5 +1,48 @@
 #Learning-summary
 **Using Ubuntu14.04 system**
+#First of all,let us know what is apt-get.
+
+Advanced Package Tool, also known as apt-get, is one for Unix and Linux systems application manager.For retrieving the application and load it into Debian Linux system.In its ability to resolve outstanding software dependencies One of the reasons Apt-get fame.
+
+##apt Command Usage
+```bash
+apt-get update
+```
+Run this command after changing /etc/apt/sources.list or / etc / apt / preferences. In addition, you need to periodically run this command to make sure your package list is up to date.
+```bash
+apt-get install packagename
+```
+Install a new package (see below aptitude)
+```bash
+apt-get remove packagename
+```
+Uninstalling an installed package (reservations configuration documentation)
+```bash
+apt-get remove --purge packagename
+```
+Uninstall package (delete the configuration file) installed a
+```bash
+apt-get autoremove packagename
+```
+Remove packages and their dependent packages
+```bash
+apt-get autoremove --purge packagname
+```
+Remove packages and their dependencies package + profile, than to remove it completely above
+```bash
+apt-get autoclean
+```
+apt would have been loaded or unloaded backup software on the hard drive, so if space is needed, then, to allow the command to delete the uninstall software you have a backup.
+```bash
+apt-get clean
+```
+This command will install the backup software also deleted, but this does not affect the use of the software.
+```bash
+apt-get upgrade
+```
+You can use this command to update the package, apt-get upgrade can not only update packages from the release of the same version number, you can also update packages from the new version of the release.
+
+#Installation and Configuration Nginx
 ##1.install Nginx.
 ```bash
 $ sudo apt-get install update

@@ -106,6 +106,27 @@ class Tag extends CActiveRecord
 		return parent::model($className);
 	}
 
+	public function findTagWeights($limit=20)
+    {
+        $models=$this->findAll(array(
+            'order'=>'frequency DESC',
+            'limit'=>$limit,
+        ));
+
+        $total=0;
+        foreach ($models as $model)
+            $total+=$model->frequency;
+
+        $tags=array();
+        if ($total>0)
+        {
+            foreach ($models as $model)
+                $tags[$model->name]=8+(int)(16*$model->frequency/($total+10));
+            ksort($tags);
+        }
+        return $tags;
+    }
+
 	public function updateFrequency($oldTags, $newTags)
     {
         $oldTags=self::string2array($oldTags);

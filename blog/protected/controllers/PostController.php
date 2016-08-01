@@ -67,6 +67,7 @@ class PostController extends Controller
 	{
 		$post = $this->loadModel();
         $comment = $this->newComment($post);
+
         $this->render('view', array(
             'model' => $post,
             'comment' => $comment,
@@ -174,13 +175,17 @@ class PostController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete()
 	{
-		$this->loadModel($id)->delete();
+		if(Yii::app()->request->isPostRequest)
+        {
+            $this->loadModel()->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            if (!isset($_GET['ajax']))
+                $this->redirect(array('index'));
+        }
+        else
+            throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**

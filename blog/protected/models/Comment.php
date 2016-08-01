@@ -144,7 +144,7 @@ class Comment extends CActiveRecord
     {
         return $this->with('post')->findAll(array(
             'condition' => 't.status='.self::STATUS_APPROVED,
-            'order' => 't.creat_time DESC',
+            'order' => 't.create_time DESC',
             'limit' =>$limit,
         ));
     }

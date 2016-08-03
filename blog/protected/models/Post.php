@@ -142,7 +142,7 @@ class Post extends CActiveRecord
 
     public function addComment($comment)
     {
-        if (Yii::app()->parames['commentNeedApproval'])
+        if (Yii::app()->params['commentNeedApproval'])
             $comment->status = Comment::STATUS_PENDING;
         else
             $comment->status = Comment::STATUS_APPROVED;
@@ -150,13 +150,7 @@ class Post extends CActiveRecord
         return $comment->save();
     }
 
-    protected function afterFind()
-    {
-        parent::afterFind();
-        $this->_oldTags=$this->tags;
-    }
-
-    protected function beforeSave()
+	protected function beforeSave()
     {
         if(parent::beforeSave())
         {
@@ -178,10 +172,16 @@ class Post extends CActiveRecord
         Tag::model()->updateFrequency($this->_oldTags, $this->tags);
     }
 
+    protected function afterFind()
+    {
+        parent::afterFind();
+        $this->_oldTags=$this->tags;
+    }
+
     protected function afterDelete()
     {
         parent::afterDelete();
-        Comment::model()->deleteAll('post_id'.$this->id);
-        Tag::model()->updateFrequency($this->tags,'');
+        Comment::model()->deleteAll('post_id='.$this->id);
+        Tag::model()->updateFrequency($this->tags, '');
     }
 }

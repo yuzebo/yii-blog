@@ -10,5 +10,5 @@ return array(
 	'username' => 'root',
 	'password' => '123456',
 	'charset' => 'utf8',
-	'tablePrefix' => 'tbl_'
+	'tablePrefix' => 'tbl_',
 );

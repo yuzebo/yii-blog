@@ -1,8 +1,8 @@
 #Learning-summary
-**Using Ubuntu14.04 system**
-#First of all,let us know what is apt-get.
+**Using [Ubuntu](http://www.ubuntu.com/global)14.04 system**
+#First of all,let us know what is [apt-get](https://help.ubuntu.com/12.04/serverguide/apt-get.html).
 
-Advanced Package Tool, also known as apt-get, is one for Unix and Linux systems application manager.For retrieving the application and load it into Debian Linux system.In its ability to resolve outstanding software dependencies One of the reasons Apt-get fame.
+Advanced Package Tool, also known as [apt-get](https://help.ubuntu.com/12.04/serverguide/apt-get.html), is one for [Unix](https://en.wikipedia.org/wiki/Unix) and [Linux](https://en.wikipedia.org/wiki/Linux) systems application manager.For retrieving the application and load it into Debian Linux system.In its ability to resolve outstanding software dependencies One of the reasons Apt-get fame.
 
 ##apt Command Usage
 ```bash
@@ -42,13 +42,13 @@ apt-get upgrade
 ```
 You can use this command to update the package, apt-get upgrade can not only update packages from the release of the same version number, you can also update packages from the new version of the release.
 
-#Installation and Configuration Nginx
-##1.install Nginx.
+#Installation and Configuration [Nginx](https://nginx.org)
+##1.install [Nginx](https://nginx.org).
 ```bash
 $ sudo apt-get install update
 $ sudo apt-get install nginx
 ```
-##2.test Nginx.
+##2.test [Nginx](https://nginx.org).
 View the machine IP address
 ```bash
 ip addr show eth0 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
@@ -57,7 +57,7 @@ use a web browser then write
 ```bash
 http://127.0.0.1 or http:// local ip
 ```
-to check that Nginx is working.
+to check that [Nginx](https://nginx.org) is working.
 
 ##3.install php.
 ```bash
@@ -116,19 +116,20 @@ server {
     }
 }
 ```
-##7.Restart nginx server
+##7.Restart [Nginx](https://nginx.org) server
 ```bash
-$ sudo service nginx restart
+$ sudo service [Nginx](https://nginx.org) restart
 ```
-##8.Download yii1.1 tar.gz
+##8.Download yii1.1 tar.gz 
+[yii](http://www.yiiframework.com/) is a php framework.
 https://github.com/yiisoft/yii/releases/download/1.1.17/yii-1.1.17.467ff50.tar.gz
 
 ##9.Unzip yii to specify the root directory
 ```bash
 $ sudo tar -zxvf yii-1.1.17.467ff50.tar.gz -C /usr/share/nginx/html
 ```
-The release of the Yii version depends on the version you downloaded.
-Change file name to yii
+The release of the [yii](http://www.yiiframework.com/) version depends on the version you downloaded.
+Change file name to [yii](http://www.yiiframework.com/)
 ```bash
 $ sudo mv yii-1.1.17.467ff50 yii
 ```
@@ -139,14 +140,14 @@ $ sudo mv yii-1.1.17.467ff50 yii
 ```
 Create a Web application under '/wwwroot/blog'? [Yes|No]y
 
-##11.Check your blog application is working
+##11.Check your [blog application](http://www.yiiframework.com/doc/blog/1.1/en/start.overview) is working
 ```bash
 127.0.0.1/yii/blog/index.php
 ```
 
 **Now you can start a blog site by Yii.**
 
-##Successfully Accomplished next step is use github
+##Successfully Accomplished next step is use [github](https://github.com/)
 
 ##1.First, create a ssh key locally
 ```bash

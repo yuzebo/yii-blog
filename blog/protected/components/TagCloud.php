@@ -17,7 +17,7 @@ class TagCloud extends CPortlet
             echo CHtml::tag('span', array(
                 'class'=>'tag',
                 'style'=>"font-size:{$weight}pt",
-            ),$link)."\n";
+                ), $link)."\n";
         }
     }
 }

@@ -11,15 +11,17 @@
 class Tag extends CActiveRecord
 {
 
-    public static function string2array($tags)
+    /**
+     * Returns the static model of the specified AR class.
+     * Please note that you should have this exact method in all your CActiveRecord descendants!
+     * @param string $className active record class name.
+     * @return Tag the static model class
+     */
+    public static function model($className=__CLASS__)
     {
-        return preg_split('/\s*,\s*/',trim($tags),-1,PREG_SPLIT_NO_EMPTY);
+        return parent::model($className);
     }
 
-    public static function array2string($tags)
-    {
-        return implode(', ',$tags);
-    }
 	/**
 	 * @return string the associated database table name
 	 */
@@ -95,16 +97,7 @@ class Tag extends CActiveRecord
 		));
 	}
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * Please note that you should have this exact method in all your CActiveRecord descendants!
-	 * @param string $className active record class name.
-	 * @return Tag the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+
 
 	public function findTagWeights($limit=20)
     {
@@ -124,14 +117,28 @@ class Tag extends CActiveRecord
                 $tags[$model->name]=8+(int)(16*$model->frequency/($total+10));
             ksort($tags);
         }
+//        print_r($tags);die;
         return $tags;
+    }
+
+
+
+
+    public static function string2array($tags)
+    {
+        return preg_split('/\s*,\s*/',trim($tags),-1,PREG_SPLIT_NO_EMPTY);
+    }
+
+    public static function array2string($tags)
+    {
+        return implode(', ',$tags);
     }
 
 	public function updateFrequency($oldTags, $newTags)
     {
         $oldTags=self::string2array($oldTags);
         $newTags=self::string2array($newTags);
-        $this->addTags(array_values(array_diff($oldTags, $newTags)));
+        $this->addTags(array_values(array_diff($newTags, $oldTags)));
         $this->removeTags(array_values(array_diff($oldTags, $newTags)));
     }
 
@@ -139,7 +146,8 @@ class Tag extends CActiveRecord
     {
         $criteria = new CDbCriteria;
         $criteria->addInCondition('name', $tags);
-        $this->updateCounters(array('frequency' => 1), $criteria);
+        $this->updateCounters(array('frequency' => 1),$criteria);
+//        print_r($this->updateCounters(array('frequency' => 1),$criteria));die;
         foreach ($tags as $name)
         {
             if (!$this->exists('name = :name', array(':name' => $name)))
@@ -161,4 +169,20 @@ class Tag extends CActiveRecord
         $this->updateCounters(array('frequency'=>-1),$criteria);
         $this->deleteAll('frequency<=0');
     }
+
+        public function suggestTags($keyword,$limit=20)
+        {
+            $tags=$this->findAll(array(
+                'condition'=>'name LIKE :keyword',
+                'order'=>'frequency DESC, Name',
+                'limit'=>$limit,
+                'params'=>array(
+                    ':keyword'=>'%'.strtr($keyword,array('%'=>'\%', '_'=>'\_', '\\'=>'\\\\')).'%',
+                ),
+            ));
+            $names=array();
+            foreach($tags as $tag)
+                $names[]=$tag->name;
+            return $names;
+        }
 }

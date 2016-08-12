@@ -116,7 +116,8 @@ class Comment extends CActiveRecord
 
     public function approve()
     {
-        $this->status = Comment::STATUS_APPROVED;
+      //  $this->status = Comment::STATUS_APPROVED;
+        $this->status=self::STATUS_APPROVED;
         $this->update(array('status'));
     }
 

@@ -77,7 +77,7 @@ class PostController extends Controller
 	protected function newComment($post)
     {
         $comment = new Comment;
-
+//var_dump(isset($_POST['ajax']) && $_POST['ajax']==='comment-form');die;
         if(isset($_POST['ajax']) && $_POST['ajax']==='comment-form')
         {
             echo CActiverForm::validate($comment);
